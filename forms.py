@@ -4,21 +4,27 @@ from wtforms.validators import ValidationError
 from wtforms.fields import IntegerField, SelectField, SubmitField, StringField, PasswordField
 from models import Person, User
 
+
+#---------------------Persons----------------------------
 def check_if_Person_email_exist_in_database(email:str) -> bool:
     return True if  Person.query.where(Person.email==email).first() else False
 
 def check_if_Person_username_exist_in_database(username:str) -> bool:
     return True if  Person.query.where(Person.username==username).first() else False
 
-def check_if_User_email_exist_in_database(email:str) -> bool:
-    return True if  User.query.where(User.email==email).first() else False
-
-
 def check_if_email_is_valid_and_not_used(form, field):
     if check_if_Person_email_exist_in_database(field.data):
         raise ValidationError('Email already exist!')
     
 def check_if_username_is_valid_and_not_used(form, field):
+    if check_if_Person_username_exist_in_database(field.data):
+        raise ValidationError('Username already exist!')
+    
+#---------------------USER----------------------------    
+def check_if_User_email_exist_in_database(email:str) -> bool:
+    return True if  User.query.where(User.email==email).first() else False
+    
+def check_if_user_email_is_valid_and_not_used(form, field):
     if check_if_Person_username_exist_in_database(field.data):
         raise ValidationError('Username already exist!')
 
@@ -31,7 +37,7 @@ class RegisterNewPersonForm(FlaskForm):
     submit = SubmitField('Skapa')
 
 class RegisterNewUserForm(FlaskForm):
-    email = StringField('Epost', [validators.DataRequired(), ])
+    email = StringField('Epost', [validators.DataRequired(), check_if_user_email_is_valid_and_not_used])
     password = PasswordField('Lösenord', [
         validators.DataRequired(),
         validators.EqualTo('confirm', message='Måste vara samma lösenord!')

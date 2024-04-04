@@ -5,3 +5,14 @@
     <a href="{{ url_for(endpoint) }}">{{text}}</a>
 {% endif %}
 {% endmacro %}
+
+{% macro render_field_with_errors(field) %}
+  <div class="fs-div" id="{{ field.id|default('fs-field') }}">
+    {{ field.label }} {{ field(**kwargs)|safe }}
+    {% if field.errors %}
+      <ul>
+        {% for error in field.errors %}<li class="fs-error-msg">{{ error }}</li>{% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+{% endmacro %}

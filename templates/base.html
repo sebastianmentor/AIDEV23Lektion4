@@ -12,16 +12,17 @@
         <div class="nav-bar">
             {% if current_user.is_authenticated %}
                 {{nav_link('home_page', 'Home')}}
-                {{nav_link('register_new_user', 'Register')}}
-                {{nav_link('all_users', 'All users')}}
+                {{nav_link('register_new_person', 'Register')}}
+                {{nav_link('all_users', 'All Persons')}}
                 {{nav_link('goto_user', 'Go To')}}
 
                 {% for role in current_user.roles %}
                     {% if "Admin" == role.name %}
-                        <a href="{{url_for('super_admin_page')}}">Register</a>
+                        <a href="{{url_for('super_admin_page')}}">Admin</a>
                     {% endif %}
                 {% endfor %}
                 <a href="{{url_for('logout_2')}}">Logout</a>
+                {{nav_link('register_new_user', 'New User')}}
             {% endif%}
         </div>
 

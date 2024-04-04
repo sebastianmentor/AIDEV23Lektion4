@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_migrate import Migrate, upgrade
 from flask_security import Security, login_required, roles_accepted, roles_required
-from models import db, Person, seed_data, user_datastore
+from models import db, Person, seed_data, user_datastore, hash_password, datetime
 from dotenv import load_dotenv
+from forms import RegisterNewPersonForm, RegisterNewUserForm
 import os
 
 load_dotenv()
@@ -25,32 +26,43 @@ security = Security(app, user_datastore)
 def home_page():
     return render_template("index.html")
 
-@app.route("/register", methods = ["GET", "POST"])
+@app.route("/newuser", methods = ["GET", "POST"])
 @login_required
 def register_new_user():
-    if request.method == 'POST':
-        name = request.form.get('name')
-        age = request.form.get('age',type=int)
-        email = request.form.get('email')
-        username = request.form.get('username')
-        phone = request.form.get('phone')
+    form = RegisterNewUserForm()
+    if request.method == 'POST' and form.validate_on_submit():
+            roles = form.roles.data
+            user_datastore.create_user(
+                email=form.email.data, 
+                password=hash_password(form.password.data),
+                confirmed_at=datetime.datetime.now(),
+                roles= [roles])
+            
+            db.session.commit()
+            flash(f"Succesfully added new User!")
+        
+    return render_template('register_new_superuser.html', form=form)
 
-        user_name_taken = Person.query.filter(Person.username == username).all()
-        user_email_taken = Person.query.filter(Person.email == email).all()
-
-        if user_name_taken or user_email_taken:
-            flash(f"Username or email already exist!")
-        else:
-            new_user = Person(name=name, 
-                            age=age,
-                            email=email,
-                            username=username,
-                            phone=phone)
-            db.session.add(new_user)
+@app.route("/register", methods = ["GET", "POST"])
+@login_required
+def register_new_person():
+    form = RegisterNewPersonForm()
+    if request.method == 'POST' and form.validate_on_submit():
+            
+            new_person = Person(
+                            name=form.name.data, 
+                            age=form.age.data,
+                            email=form.email.data,
+                            username=form.username.data,
+                            phone=form.phone.data
+                            )
+            
+            db.session.add(new_person)
             db.session.commit()
             flash(f"Succesfully added new user!")
+            return redirect(url_for('user_page', user_id = new_person.id))
         
-    return render_template('register_user.html')
+    return render_template('register_user.html', form=form)
 
 @app.route("/allusers")
 @login_required

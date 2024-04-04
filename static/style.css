@@ -1,0 +1,442 @@
+/* Grundläggande reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    margin: 20px;
+}
+
+.container {
+    max-width: 1100px;
+    margin: auto;
+    padding: 20px;
+    overflow: auto;
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #0779e4 3px solid;
+}
+
+header h1 {
+    text-align: center;
+    margin: 0;
+}
+
+ul {
+    list-style: none;
+    background: #f4f4f4;
+    margin-top: 20px;
+}
+
+ul li {
+    padding: 15px;
+    border-bottom: 1px #ccc dotted;
+}
+
+ul li:last-child {
+    border-bottom: none;
+}
+
+ul li a {
+    text-decoration: none;
+    color: #333;
+}
+
+ul li a.active {
+    text-decoration: none;
+    color: #15bc39;
+}
+
+/* Lägg till extra stilar nedan */
+.content-wrap {
+    min-height: calc(100% - 80px); /* Justera detta värde baserat på footerns höjd */
+    padding-bottom: 40px; /* Halva footerns höjd */
+    position: relative;
+}
+
+.welcome-text h1 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.welcome-text p {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.team-image {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.team-image img {
+    border-radius: 50%; /* Skapar en cirkulär bild */
+    width: 500px; /* Justera detta värde efter storleken på din bild */
+    height: 500px; /* Justera detta värde efter storleken på din bild */
+    object-fit: cover; /* Ser till att bilden täcker utrymmet korrekt utan att förvrängas */
+}
+
+.info-boxes {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.info-box {
+    width: 30%; /* Justera detta värde efter behov */
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px; /* Ger rundade hörn */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Lägger till en lätt skugga för djup */
+}
+
+.info-box h2 {
+    margin-bottom: 15px;
+}
+
+.info-box p {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+
+/* Formulärstil */
+.form-group {
+    margin: 20px 0;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0 22px 0;
+    display: inline-block;
+    border: none;
+    background: #f1f1f1;
+}
+
+.form-control:focus {
+    background-color: #ddd;
+    outline: none;
+}
+
+.form-label {
+    margin-bottom: 10px;
+    display: block;
+}
+
+/* Knappstil */
+.btn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.btn:hover {
+    opacity: 1;
+}
+
+/* Tabellstilar */
+.table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.table td, .table th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+.table tr:nth-child(even){background-color: #f2f2f2;}
+
+.table th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Överskrift för tabell */
+.table-header {
+    font-size: 24px;
+    margin: 20px 0;
+}
+
+/* Responsiv design */
+@media screen and (max-width: 600px) {
+    .table, .form-control {
+        width: 100%;
+    }
+    .info-box {
+        width: 80%; /* Bredden på info-rutan på mindre skärmar */
+        margin-bottom: 20px; /* Lägg till*/
+    }
+}
+
+/* Vänsterplacerad nav-bar */
+.nav-bar {
+    height: 100%; /* Full höjd */
+    width: 160px; /* Bredden på nav-baren */
+    position: fixed; /* Gör så att nav-baren är fast på vänster sida */
+    z-index: 1; /* Säkerställer att nav-baren är ovanpå andra element */
+    top: 0; /* Startar från toppen av sidan */
+    left: 0; /* Startar från vänster sida av sidan */
+    background-color: #111; /* Färg på nav-baren */
+    overflow-x: hidden; /* Döljer horisontell scroll */
+    padding-top: 20px; /* Lite utrymme på toppen */
+}
+
+.nav-bar a {
+    padding: 8px 10px; /* Padding inuti länkar */
+    text-decoration: none; /* Tar bort understrykning */
+    font-size: 18px; /* Storlek på text */
+    color: white; /* Textfärg */
+    display: block; /* Gör länkarna till block-element */
+}
+
+.nav-bar a:hover {
+    background-color: #575757; /* Färg för länkar vid hover */
+}
+
+.nav-bar a.active {
+    background-color: #4CAF50; /* Ändrar bakgrundsfärgen på den aktiva länken */
+}
+
+.info-box {
+    transition: transform 0.2s ease-in-out; /* Lägger till en animeringseffekt */
+}
+
+.info-box:hover {
+    transform: scale(1.05); /* När muspekaren är över, öka storleken lite */
+}
+
+/* Lägg till roliga robotikoner eller bakgrunder */
+.team-image img {
+    border: 4px solid #4CAF50; /* Grön ram runt robotbilder */
+    border-radius: 50%; /* Behåller den cirkulära designen */
+    width: 33%; /* Ny bredd */
+    height: auto; /* Höjden justeras automatiskt */
+    object-fit: cover; /* Ser till att bilden täcker utrymmet korrekt */
+}
+
+
+/* Lägg till en margin till huvudinnehållet så det inte hamnar under nav-baren */
+.content {
+    margin-left: 100px; /* Samma som bredden på nav-baren */
+    padding: 20px; /* Lite utrymme runtom */
+}
+
+.site-footer {
+    background-color: #111;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.site-footer p {
+    margin: 0;
+    color: #999;
+}
+
+.about-section {
+    margin-bottom: 20px;
+}
+
+.team-members {
+    margin-bottom: 20px;
+}
+
+.member {
+    margin-bottom: 10px;
+}
+
+.search-box {
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+
+.search-input {
+    width: 50%; /* Eller någon annan procentandel eller fast bredd beroende på designen */
+    padding: 15px; /* Ger mer utrymme inuti sökfältet */
+    font-size: 18px; /* Gör texten större och lättare att läsa */
+    margin: 5px 0; /* Behåller lite marginal */
+    border: 2px solid #ddd; /* Justera vid behov */
+    border-radius: 8px; /* Ger sökfältet rundade hörn */
+    display: block; /* Säkerställer att sökrutan tar upp hela radens bredd enligt angiven bredd */
+    margin-left: auto; /* Centrerar sökrutan om display är block */
+    margin-right: auto; /* Centrerar sökrutan om display är block */
+}
+
+
+.search-button {
+    width: auto; /* Ändrar från 100% till auto så att bredden bestäms av knappens innehåll */
+    max-width: 200px; /* Du kan justera detta värde efter önskad maxbredd */
+    padding: 8px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    display: inline-block; /* Det här gör att knappen inte tar upp hela bredden */
+}
+
+.search-button:hover {
+    background-color: #45a049;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.page-link {
+    padding: 10px 15px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    color: #333;
+    text-decoration: none;
+    border-radius: 5px;
+}
+
+.page-link:hover {
+    background-color: #f2f2f2;
+}
+
+.page-link.active {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+}
+
+a{
+    text-decoration:none;
+}
+
+.person-container {
+    display: flex;
+    align-items: center;
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+.person-picture img {
+    width: 150px; /* Du kan justera detta för att ändra bildens storlek */
+    height: 150px; /* Se till att bredd och höjd är lika för en perfekt cirkel */
+    border-radius: 50%; /* Detta gör bilden cirkulär */
+    margin-right: 20px; /* Lägger till utrymme mellan bilden och texten */
+    object-fit: cover; /* Ser till att bilden täcker utrymmet korrekt */
+}
+
+.person-profile {
+    flex: 1; /* Tar upp återstående utrymme */
+}
+
+.person-profile h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.person-profile p {
+    margin-bottom: 5px;
+    line-height: 1.6;
+}
+
+/* Inloggningssida Stilar */
+.login-container {
+    max-width: 400px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-header h2 {
+    margin: 0;
+    color: #333;
+}
+
+.login-form-group {
+    margin-bottom: 15px;
+}
+
+.login-form-label {
+    display: block;
+    margin-bottom: 5px;
+    color: #333;
+}
+
+.login-form-input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: #f9f9f9;
+}
+
+.login-form-input:focus {
+    border-color: #0779e4;
+    background-color: #fff;
+    outline: none;
+}
+
+.login-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.login-button:hover {
+    background-color: #45a049;
+}
+
+.login-footer {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.login-footer a {
+    color: #0779e4;
+    text-decoration: none;
+}
+
+.login-footer a:hover {
+    text-decoration: underline;
+}

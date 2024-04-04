@@ -1,0 +1,37 @@
+{% from "_macros.html" import nav_link with context%}
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}{%endblock%}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+    <div class="content-wrap">
+        <div class="nav-bar">
+            {% if current_user.is_authenticated %}
+                {{nav_link('home_page', 'Home')}}
+                {{nav_link('register_new_user', 'Register')}}
+                {{nav_link('all_users', 'All users')}}
+                {{nav_link('goto_user', 'Go To')}}
+
+                {% for role in current_user.roles %}
+                    {% if "Admin" == role.name %}
+                        <a href="{{url_for('super_admin_page')}}">Register</a>
+                    {% endif %}
+                {% endfor %}
+                <a href="{{url_for('logout_2')}}">Logout</a>
+            {% endif%}
+        </div>
+
+        <div class="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+    </div>
+    <footer class="site-footer">
+        <p>© 2024 Master Us3rs</p>
+    </footer>    
+</body>
+</html>

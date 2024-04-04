@@ -1,0 +1,40 @@
+{% extends "base.html"%}
+{% block title %}
+Homepage
+{% endblock %}
+
+{% block content %}
+<div class="content">
+    <header>
+        <h1>Välkommen till Robotvänner!</h1>
+    </header>
+
+    <div class="welcome-text">
+        <h1>Träffa Våra Robotvänner!</h1>
+        <p>Denna sida är tillägnad alla robotentusiaster där ute.</p>
+    </div>
+
+    <div class="team-image">
+    
+        <img src="{{url_for('static',filename ='robot1.webp')}}" alt="Robot 1">
+        <img src="{{url_for('static',filename ='robot2.webp')}}" alt="Robot 2">
+        <img src="{{url_for('static',filename ='robot3.webp')}}" alt="Robot 3">
+
+    </div>
+
+    <div class="info-boxes">
+        <div class="info-box">
+            <h2>RoboBob</h2>
+            <p>Den vänligaste roboten du någonsin kommer att träffa. RoboBob älskar att hjälpa till med hushållssysslor.</p>
+        </div>
+        <div class="info-box">
+            <h2>TechTina</h2>
+            <p>TechTina är en mästare på att lösa komplicerade programmeringsproblem. Hon delar gärna med sig av sina kunskaper.</p>
+        </div>
+        <div class="info-box">
+            <h2>GadgetGary</h2>
+            <p>GadgetGary är full av överraskningar och har alltid det senaste inom teknik. Hans uppfinningar är revolutionerande.</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

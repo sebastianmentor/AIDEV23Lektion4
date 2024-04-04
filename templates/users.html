@@ -1,0 +1,130 @@
+{% extends "base.html"%}
+{% block title %}
+All users
+{% endblock %}
+
+{% block content %}
+{% with messages = get_flashed_messages() %}
+   {% if messages %}
+      {% for message in messages %}
+         {{ message }}
+      {% endfor %}
+   {% endif %}
+{% endwith %}
+<div class="container">
+    <h1>Alla Anställda</h1>
+    <table class="table table-bordered">
+        <form method="get">
+            <div class="search-box">
+                <input type="text" name="q" placeholder="Search..." required value="{{q}}">
+                <button class="search-button" type="submit">Sök</button>
+            </div>
+        </form>
+        <thead>
+            <tr>
+           <th scope="col">ID
+                <a href="{{url_for('all_users', sort_column = 'id', sort_order = 'asc', q = q)}}">
+                    <i class='bx bxs-up-arrow'></i>
+                </a>
+                <a href="{{url_for('all_users', sort_column = 'id', sort_order = 'desc', q = q)}}">
+                    <i class='bx bxs-down-arrow'></i>
+                </a>
+           </th>
+           <th scope="col">Name
+                <a href="{{url_for('all_users', sort_column = 'name', sort_order = 'asc', q = q)}}">
+                    <i class='bx bxs-up-arrow'></i>
+                </a>
+                <a href="{{url_for('all_users', sort_column = 'name', sort_order = 'desc', q = q)}}">
+                    <i class='bx bxs-down-arrow'></i>
+                </a>
+            </th>
+            <th scope="col">Age
+                <a href="{{url_for('all_users', sort_column = 'age', sort_order = 'asc', q = q)}}">
+                    <i class='bx bxs-up-arrow'></i>
+                </a>
+                <a href="{{url_for('all_users', sort_column = 'age', sort_order = 'desc', q = q)}}">
+                    <i class='bx bxs-down-arrow'></i>
+                </a>
+            </th>
+            <th scope="col">Phone
+                <a href="{{url_for('all_users', sort_column = 'phone', sort_order = 'asc', q = q)}}">
+                    <i class='bx bxs-up-arrow'></i>
+                </a>
+                <a href="{{url_for('all_users', sort_column = 'phone', sort_order = 'desc', q = q)}}">
+                    <i class='bx bxs-down-arrow'></i>
+                </a>
+            </th>
+            <th scope="col">Email
+                <a href="{{url_for('all_users', sort_column = 'email', sort_order = 'asc', q = q)}}">
+                    <i class='bx bxs-up-arrow'></i>
+                </a>
+                <a href="{{url_for('all_users', sort_column = 'email', sort_order = 'desc', q = q)}}">
+                    <i class='bx bxs-down-arrow'></i>
+                </a>
+            </th>
+            <th scope="col">Go to</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in all_users%}
+        <tr>
+            <td scope="row">{{user.id}}</td>
+            <td scope="col">{{user.name}}</td>
+            <td scope="col">{{user.age}}</td>
+            <td scope="col">{{user.phone}}</td>
+            <td scope="col">{{user.email}}</td>
+            <td scope="col">
+                <a href="{{url_for('user_page', user_id = user.id)}}">
+                    <i class='bx bx-accessibility'></i>
+                </a>
+            </td>
+        </tr>
+        {%endfor%}
+    </tbody>
+ </table>
+ <nav aria-label="Page navigation example">
+    <ul class="pagination">
+        {% if pages !=1 %}    
+            {% if has_prev %}
+            <li class="page-item">
+                <a class="page-link" href="{{url_for('all_users', sort_column = sort_column, sort_order = sort_order, q=q, page = page - 1)}}" aria-label="Föregående">
+                    <i class='bx bx-chevrons-left'></i>
+                </a>
+            </li>
+            {% else %}
+            <li class="page-item disabled">
+                <a class="page-link"><i class='bx bx-chevrons-left'></i></box-icon></a>
+            </li>
+            {% endif %}
+
+            {% for page in pagination.iter_pages(left_edge=0, right_edge=0, left_current=2, right_current=2) %}
+                {% if page %}
+                    {% if page != pagination.page %}
+                    <li class="page-item">
+                        <a class="page-link" href="{{url_for('all_users', sort_column = sort_column, sort_order = sort_order, q=q, page = page)}}">{{ page }}</a>
+                    </li>
+                        
+                    {% else %}
+                    <li class="page-item active">
+                        <a class="page-link"><strong>{{ page }}</strong></a>
+                    </li>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+            {% if has_next %}
+                <li class="page-item">
+                    <a class="page-link" href="{{url_for('all_users', sort_column = sort_column, sort_order = sort_order, q=q, page = page + 1)}}">
+                        <i class='bx bx-chevrons-right'></i>
+                    </a>
+                </li>
+            {% else %}
+                <li class="page-item disabled">
+                    <a class="page-link"><i class='bx bx-chevrons-right'></i></a>
+                </li>
+            {% endif %}
+        {% endif %}
+    </ul>
+    <p>Page {{page}} out of {{pages}}</p>
+ </nav>
+</div>
+{% endblock %}
